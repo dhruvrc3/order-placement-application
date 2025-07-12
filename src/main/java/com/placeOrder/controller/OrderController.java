@@ -50,12 +50,16 @@ public class OrderController {
     			model = orderProcessService.processOrder(productId, quantity, customerId,amount, model);
     		
     		}else {
-    			message = "Quantity can not be zero or negative ! Please enter valid quantity";}
+    			message = "Quantity can not be zero or negative ! Please enter valid quantity";
+		model.addAttribute("products", productRepository.findAll());
+		model.addAttribute("message", message);
+		}
     	}else {
     		message = "ProductId can not be null ! Please insert valid ProductId";
-    	}
-    	model.addAttribute("products", productRepository.findAll());
+		model.addAttribute("products", productRepository.findAll());
 		model.addAttribute("message", message);
+    	}
+    	
     		   return "place-order"; // reload with updated info
     }
 }
